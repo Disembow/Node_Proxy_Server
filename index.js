@@ -1,29 +1,18 @@
-import axios from "axios";
 import express from "express";
-import config from "./config.js";
-import { handleError } from "./utils/handleError.js";
-import { parseMeteors } from "./utils/parseMeteors.js";
+import config from "./app/config/config.js";
+import meteorRouter from "./app/routers/meteorRouter.js";
+import { errorHandler } from "./app/utils/errorHandler.js";
 
-const { BASE_API_URL, PORT, API_KEY, START_DATE, END_DATE } = config;
-
-const requestUrl = `${BASE_API_URL}/neo/rest/v1/feed?start_date=${START_DATE}&end_date=${END_DATE}&api_key=${API_KEY}`;
+const { PORT } = config;
 
 const app = express();
 
-app.get("/", (_, res) => {
-  res.send("Server works");
-});
+app.use(errorHandler);
 
-app.get("/meteors", async (_, res) => {
-  try {
-    const response = await axios.get(requestUrl);
+app.use("/api/v1/meteors", meteorRouter);
 
-    const data = parseMeteors(response.data.near_earth_objects);
-
-    res.status(200).json(data);
-  } catch (error) {
-    handleError(res, error);
-  }
+app.use((_, res) => {
+  res.status(404).send("<h1>Page not found on the server</h1>");
 });
 
 app.listen(PORT, () => console.log(`Server is running on ${PORT}...`));
