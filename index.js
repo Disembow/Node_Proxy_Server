@@ -1,6 +1,8 @@
 import axios from "axios";
 import express from "express";
 import config from "./config.js";
+import { handleError } from "./utils/handleError.js";
+import { parseMeteors } from "./utils/parseMeteors.js";
 
 const { BASE_API_URL, PORT, API_KEY, START_DATE, END_DATE } = config;
 
@@ -14,11 +16,13 @@ app.get("/", (_, res) => {
 
 app.get("/meteors", async (_, res) => {
   try {
-    const data = await axios.get(requestUrl);
-    res.status(200).json(data.data);
+    const response = await axios.get(requestUrl);
+
+    const data = parseMeteors(response.data.near_earth_objects);
+
+    res.status(200).json(data);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: error });
+    handleError(res, error);
   }
 });
 
