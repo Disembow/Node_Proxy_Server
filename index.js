@@ -1,4 +1,5 @@
 import express from "express";
+
 import config from "./app/config/config.js";
 import meteorRouter from "./app/routers/meteorRouter.js";
 import { errorHandler } from "./app/utils/errorHandler.js";

@@ -1,8 +1,11 @@
 import axios from "axios";
-import { getApiUrl } from "../utils/getApiUrl.js";
+
+import config from "../config/config.js";
+
+const { BASE_API_URL, API_KEY } = config;
 
 export const getMeteors = async (startDate, endDate) => {
-  const url = getApiUrl(startDate, endDate);
+  const url = `${BASE_API_URL}/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`;
 
   const response = await axios.get(url);
 
