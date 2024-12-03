@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Meteors",
+			"name": "Meteors with query params",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -23,7 +23,33 @@
 						}
 					}
 				},
-				"url": "http://localhost:4000/api/v1/meteors"
+				"url": {
+					"raw": "http://localhost:4000/api/v1/meteors?isDangerous=false&date=2024-12-07&count=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"meteors"
+					],
+					"query": [
+						{
+							"key": "isDangerous",
+							"value": "false"
+						},
+						{
+							"key": "date",
+							"value": "2024-12-07"
+						},
+						{
+							"key": "count",
+							"value": "2"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -45,6 +71,15 @@
 					}
 				},
 				"url": "http://localhost:4000/not-found-page"
+			},
+			"response": []
+		},
+		{
+			"name": "Meteors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/api/v1/meteors"
 			},
 			"response": []
 		}

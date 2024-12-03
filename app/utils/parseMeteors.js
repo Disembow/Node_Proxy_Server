@@ -1,5 +1,21 @@
-export const parseMeteors = (data) => {
-  const result = Object.values(data).flatMap((day) =>
+import { dangerousQueryParams } from "../constants/queryConstants.js";
+
+export const filterMeteors = (data, count, isDangerous) => {
+  let result = parseMeteors(data);
+
+  if (isDangerous) {
+    result = handleIsDangerous(isDangerous, result);
+  }
+
+  if (count) {
+    result = handleCount(count, result);
+  }
+
+  return result;
+};
+
+const parseMeteors = (data) => {
+  return Object.values(data).flatMap((day) =>
     day.map((meteor) => ({
       id: meteor.id,
       name: meteor.name,
@@ -14,6 +30,32 @@ export const parseMeteors = (data) => {
           ?.kilometers_per_second || null,
     }))
   );
+};
 
-  return result;
+const handleIsDangerous = (isDangerous, data) => {
+  if (!dangerousQueryParams.includes(isDangerous)) {
+    throw new Error(
+      `Invalid isDangerous value. Count should be true or false.`
+    );
+  }
+
+  const flag = isDangerous === "true";
+
+  return data.filter(
+    (meteor) => meteor.is_potentially_hazardous_asteroid === flag
+  );
+};
+
+const handleCount = (count, data) => {
+  const parsedCount = parseInt(count);
+
+  if (parsedCount <= 0) {
+    throw new Error(`Invalid count value. Count should be greater then zero.`);
+  }
+
+  if (isNaN(parsedCount)) {
+    throw new Error(`Invalid count value. Count should be number type.`);
+  }
+
+  return data.slice(0, parseInt(count));
 };
