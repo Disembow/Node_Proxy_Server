@@ -1,14 +1,27 @@
 import express from "express";
+import { dirname, join } from "node:path";
+import nunjucks from "nunjucks";
+import { fileURLToPath } from "url";
 
 import config from "./app/config/config.js";
 import meteorRouter from "./app/routers/meteorRouter.js";
 import { errorHandler } from "./app/utils/errorHandler.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const { PORT } = config;
 
 const app = express();
 
-app.use("/api/v1/meteors", meteorRouter);
+nunjucks.configure("app/views", {
+  autoescape: true,
+  express: app,
+});
+
+app.use("/static", express.static(join(__dirname, "public")));
+
+app.use("/api/v1/meteors/", meteorRouter);
 
 app.use((_, res) => {
   res.status(404).send("<h1>Page not found on the server</h1>");

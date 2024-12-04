@@ -11,3 +11,15 @@ export const getMeteors = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getMeteorsView = async (req, res, next) => {
+  try {
+    const { date, count, isDangerous } = req.query;
+
+    const response = await getReducedMeteors(date, count, isDangerous);
+
+    res.render("meteors.njk", { meteors: response });
+  } catch (error) {
+    next(error);
+  }
+};

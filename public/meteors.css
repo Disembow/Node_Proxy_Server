@@ -1,0 +1,44 @@
+.title {
+  text-decoration: underline;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.table-header {
+  font-size: 1.25rem;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+
+  & th {
+    padding: 0.25rem 0.5rem;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+  }
+}
+
+.table-body {
+  border-bottom: 2px solid #000000;
+
+  & td {
+    padding: 0.1rem 0.5rem;
+  }
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.danger {
+  color: #ff0000;
+}
+
+.safe {
+  color: #008000;
+}

@@ -1,0 +1,34 @@
+{% extends 'index.njk' %}
+{% block content %}
+<h1 class="title">Near Earth Asteroid data</h1>
+<table class="table">
+  <thead class="table-header">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Diameter, m</th>
+      <th>Status</th>
+      <th>Close approach date</th>
+      <th>Relative velocity, km/s</th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    {% for meteor in meteors %}
+    <tr>
+      <td class="right">{{ meteor.id }}</td>
+      <td>{{ meteor.name }}</td>
+      <td class="right">{{ meteor.diameter_in_meters.toFixed(2) }}</td>
+      <td class="center">
+        {% if meteor.is_potentially_hazardous_asteroid %}
+          <span class="danger">Dangerous</span>
+        {% else %}
+          <span class="safe">Safe</span>
+        {% endif %}
+      </td>
+      <td class="center">{{ meteor.close_approach_date_full }}</td>
+      <td class="right">{{ meteor.relative_velocity.toFixed(2) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
