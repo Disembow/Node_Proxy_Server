@@ -26,8 +26,10 @@ const parseMeteors = (data) => {
       close_approach_date_full:
         meteor.close_approach_data[0]?.close_approach_date_full || null,
       relative_velocity:
-        meteor.close_approach_data[0]?.relative_velocity
-          ?.kilometers_per_second || null,
+        parseFloat(
+          meteor.close_approach_data[0]?.relative_velocity
+            ?.kilometers_per_second
+        ) || null,
     }))
   );
 };
