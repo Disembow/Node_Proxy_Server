@@ -1,4 +1,4 @@
-import { dangerousQueryParams } from "../constants/queryConstants.js";
+import { dangerousQueryParams } from "../../constants/queryConstants.js";
 
 export const filterMeteors = (data, count, isDangerous) => {
   let result = parseMeteors(data);

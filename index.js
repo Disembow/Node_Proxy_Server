@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 
 import config from "./app/config/config.js";
 import { meteorRouter, roverImageRouter } from "./app/routers/index.js";
-import { errorHandler } from "./app/utils/errorHandler.js";
+import { errorHandler } from "./app/utils/errorHandler/errorHandler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

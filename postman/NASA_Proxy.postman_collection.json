@@ -7,6 +7,15 @@
 	},
 	"item": [
 		{
+			"name": "Meteors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/api/v1/meteors"
+			},
+			"response": []
+		},
+		{
 			"name": "Meteors with query params",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -54,6 +63,53 @@
 			"response": []
 		},
 		{
+			"name": "Meteors with query params - failed validation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/v1/meteors?isDangerous=not-true&date=date&count=count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"meteors"
+					],
+					"query": [
+						{
+							"key": "isDangerous",
+							"value": "not-true"
+						},
+						{
+							"key": "date",
+							"value": "date"
+						},
+						{
+							"key": "count",
+							"value": "count"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Not found page",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -71,15 +127,6 @@
 					}
 				},
 				"url": "http://localhost:4000/not-found-page"
-			},
-			"response": []
-		},
-		{
-			"name": "Meteors",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:4000/api/v1/meteors"
 			},
 			"response": []
 		},
@@ -129,20 +176,74 @@
 			"response": []
 		},
 		{
+			"name": "Meteors view with query params - failed validation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/v1/meteors/view?isDangerous=not-true&date=date&count=count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"meteors",
+						"view"
+					],
+					"query": [
+						{
+							"key": "isDangerous",
+							"value": "not-true"
+						},
+						{
+							"key": "date",
+							"value": "date"
+						},
+						{
+							"key": "count",
+							"value": "count"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Rover image",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"apikey\": \"OwQfbTsIY2Z2ucVRrLQF58eVTI3XDwgmAeDRv4Zy\"\r\n}",
+					"raw": "{\r\n    \"apikey\": \"OwQfbTsIY2Z2ucVRrLQF58eVTI3XDwgmAeDRv4Zy\",\r\n    \"sol\": \"3000\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:4000/rover"
+				"url": "http://localhost:4000/api/v1/rover"
+			},
+			"response": []
+		},
+		{
+			"name": "Rover image - failed validation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"apikey\": \"\",\r\n    \"sol\": \"sol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/v1/rover"
 			},
 			"response": []
 		}
