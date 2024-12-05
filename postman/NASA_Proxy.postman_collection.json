@@ -135,14 +135,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"apikey\": \"OwQfbTsIY2Z2ucVRrLQF58eVTI3XDwgmAeDRv4Zy\"\r\n}",
+					"raw": "{\r\n    \"apikey\": \"OwQfbTsIY2Z2ucVRrLQF58eVTI3XDwgmAeDRv4Zy\",\r\n    \"sol\": 3000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:4000/rover"
+				"url": "http://localhost:4000/api/v1/rover"
 			},
 			"response": []
 		}
