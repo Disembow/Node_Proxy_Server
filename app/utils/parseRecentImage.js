@@ -3,16 +3,7 @@ export const parseRecentImage = (data) => {
     return null;
   }
 
-  let result, lastDate;
-
-  data.forEach((item) => {
-    if (!lastDate) {
-      lastDate = new Date(item.earth_date);
-      result = item;
-    }
-
-    if (lastDate < new Date(item.earth_date)) result = item;
-  });
-
-  return result;
+  return data.sort(
+    (a, b) => new Date(b.earth_date) - new Date(a.earth_date)
+  )[0];
 };

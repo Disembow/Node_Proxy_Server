@@ -1,11 +1,16 @@
 import axios from "axios";
 import config from "../config/config.js";
 
-const { BASE_API_URL, API_KEY } = config;
+const { BASE_API_URL } = config;
+
+const SOL = 1000;
+const CAMERA = "fhaz";
 
 export const getRoverImage = async (apikey) => {
-  const url = `${BASE_API_URL}/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=${apikey}`;
-  const data = await axios.get(url);
+  const data = await axios.get(
+    `${BASE_API_URL}/mars-photos/api/v1/rovers/curiosity/photos`,
+    { params: { sol: SOL, camera: CAMERA, api_key: apikey } }
+  );
 
   return data;
 };
