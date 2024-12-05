@@ -1,20 +1,17 @@
+import { TAGS } from "../../constants/queryConstants.js";
+
 const options = {
   abortEarly: false,
   allowUnknown: false,
   stripUnknown: true,
 };
 
-export const TAGS = {
-  BODY: "body",
-  QUERY: "query",
-};
-
-export const validate = (schema, tag) => {
+export const validate = (schema, tag = "body") => {
   if (!schema) {
     throw new Error("Schema didn't found");
   }
 
-  if (!Object.values(TAGS).includes(tag)) {
+  if (!TAGS.includes(tag)) {
     throw new Error("Incorrect tag for request parsing was used");
   }
 
