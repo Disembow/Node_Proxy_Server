@@ -1,9 +1,8 @@
 import axios from "axios";
 import config from "../config/config.js";
+import { CAMERA } from "../constants/queryConstants.js";
 
 const { BASE_API_URL } = config;
-
-const CAMERA = "fhaz";
 
 export const getRoverImage = async (apikey, sol) => {
   const data = await axios.get(

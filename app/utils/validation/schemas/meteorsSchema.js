@@ -16,7 +16,7 @@ const schema = Joi.object({
 
   isDangerous: Joi.string().optional().valid("true", "false").messages({
     "string.base": "{#label} must be a string type",
-    "any.only": `{#label} could be only "true" or "false"`,
+    "any.only": `{#label} value could be only "true" or "false"`,
   }),
 });
 

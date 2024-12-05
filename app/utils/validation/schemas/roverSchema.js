@@ -7,7 +7,7 @@ const schema = Joi.object({
     "any.required": "{#label} is required",
   }),
 
-  sol: Joi.string().pattern(/^\d+$/).min(1).messages({
+  sol: Joi.string().optional().pattern(/^\d+$/).min(1).messages({
     "string.base": "{#label} must be a string type",
     "string.pattern.base": `{#label} must only contain numeric characters`,
     "string.min": "{#label} must be at least {#limit} characters long!",
