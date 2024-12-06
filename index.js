@@ -21,6 +21,7 @@ nunjucks.configure("app/views", {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/static", express.static(join(__dirname, "public")));
 
