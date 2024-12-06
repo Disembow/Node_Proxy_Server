@@ -1,3 +1,5 @@
+/* Meteors data styles */
+
 .title {
   text-decoration: underline;
 }
@@ -41,4 +43,36 @@
 
 .safe {
   color: #008000;
+}
+
+/* Rover form styles */
+
+.rover-form,
+.rover-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.rover-form {
+  max-width: 500px;
+  gap: 1rem;
+
+  & div {
+    gap: 0.5rem;
+  }
+
+  & label {
+    font-size: 1.25rem;
+  }
+
+  & input {
+    width: 100%;
+    height: 1.5rem;
+  }
+
+  & button {
+    width: 25%;
+    height: 1.5rem;
+    font-weight: 600;
+  }
 }

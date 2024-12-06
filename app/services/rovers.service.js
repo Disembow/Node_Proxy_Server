@@ -6,5 +6,5 @@ export const fetchRoverImage = async (apikey, sol = DEFAULT_SOL) => {
   const data = await getRoverImage(apikey, sol);
   const image = parseRecentImage(data.data.photos);
 
-  return image.img_src;
+  return image?.img_src || null;
 };

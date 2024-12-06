@@ -246,6 +246,63 @@
 				"url": "http://localhost:4000/api/v1/rover"
 			},
 			"response": []
+		},
+		{
+			"name": "Rover image form",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/v1/rover/view-form"
+			},
+			"response": []
+		},
+		{
+			"name": "Rover image view",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"apikey\": \"OwQfbTsIY2Z2ucVRrLQF58eVTI3XDwgmAeDRv4Zy\",\r\n    \"sol\": \"3000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/v1/rover/view"
+			},
+			"response": []
+		},
+		{
+			"name": "Rover image view - failed validation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"apikey\": \"\",\r\n    \"sol\": \"sol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/v1/rover"
+			},
+			"response": []
 		}
 	]
 }
