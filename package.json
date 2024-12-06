@@ -6,7 +6,17 @@
   "type": "module",
   "scripts": {
     "start": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=development npx nodemon index.js"
+    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=development npx nodemon index.js",
+    "format": "prettier -w ./app",
+    "lint": "eslint ./app",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{js, jsx, ts, tsx}": [
+      "npm run format",
+      "npm run lint"
+    ]
   },
   "keywords": [],
   "author": "Yauheni Naliotau",
@@ -22,7 +32,15 @@
     "nunjucks": "^3.2.4"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@types/express": "^5.0.0",
-    "nodemon": "^3.1.7"
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.13.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.4.2"
   }
 }

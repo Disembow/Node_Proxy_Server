@@ -28,23 +28,23 @@ const parseMeteors = (data) => {
       relative_velocity:
         parseFloat(
           meteor.close_approach_data[0]?.relative_velocity
-            ?.kilometers_per_second
+            ?.kilometers_per_second,
         ) || null,
-    }))
+    })),
   );
 };
 
 const handleIsDangerous = (isDangerous, data) => {
   if (!dangerousQueryParams.includes(isDangerous)) {
     throw new Error(
-      `Invalid isDangerous value. Count should be true or false.`
+      `Invalid isDangerous value. Count should be true or false.`,
     );
   }
 
   const flag = isDangerous === "true";
 
   return data.filter(
-    (meteor) => meteor.is_potentially_hazardous_asteroid === flag
+    (meteor) => meteor.is_potentially_hazardous_asteroid === flag,
   );
 };
 

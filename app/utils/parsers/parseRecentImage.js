@@ -4,6 +4,6 @@ export const parseRecentImage = (data) => {
   }
 
   return data.sort(
-    (a, b) => new Date(b.earth_date) - new Date(a.earth_date)
+    (a, b) => new Date(b.earth_date) - new Date(a.earth_date),
   )[0];
 };
