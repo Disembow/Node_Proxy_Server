@@ -22,7 +22,7 @@ export const getRoverImage = async (req, res, next) => {
 export const getRoverImageView = async (req, res, next) => {
   try {
     const { apikey, sol } = req.body;
-    const photo = await fetchRoverImage(apikey, sol || undefined);
+    const photo = await fetchRoverImage(apikey, sol);
 
     if (photo) {
       res.render("roverImage.njk", { photo });
