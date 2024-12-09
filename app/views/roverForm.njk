@@ -1,0 +1,17 @@
+{% extends 'index.njk' %}
+{% block content %}
+  <h1 class="title">Get Rover Image Form</h1>
+  <form action="/api/v1/rover/view" method="post" class="rover-form">
+    <div>
+      <label for="apikey">[Generated API Key]</label>
+      <input type="text" name="apikey" id="apikey" placeholder="Enter your API key">
+    </div>
+
+    <div>
+      <label for="sol">[Sol]</label>
+      <input type="number" name="sol" id="sol" placeholder="You can choose a sol">
+    </div>
+
+    <button type="submit">Get image &#8594;</button>
+  </form>
+{% endblock %}
