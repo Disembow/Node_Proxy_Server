@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/node";
 import { NextFunction, Request, Response } from "express";
 
 interface HttpError extends Error {
@@ -13,6 +14,8 @@ export const errorHandler = (
   console.error(err.stack);
 
   const isProductionMode = process.env.NODE_ENV === "production";
+
+  Sentry.captureException(err);
 
   res.status(err.status || 500).json({
     success: false,

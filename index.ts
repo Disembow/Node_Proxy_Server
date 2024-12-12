@@ -1,3 +1,5 @@
+import "./sentry.ts";
+
 import bodyParser from "body-parser";
 import express from "express";
 import { dirname, join } from "node:path";
@@ -18,6 +20,10 @@ const app = express();
 nunjucks.configure("app/views", {
   autoescape: true,
   express: app,
+});
+
+app.get("/error", () => {
+  throw new Error("Sentry test");
 });
 
 app.use(bodyParser.json());
