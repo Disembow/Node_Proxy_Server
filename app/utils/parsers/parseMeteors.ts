@@ -1,6 +1,11 @@
-import { dangerousQueryParams } from "../../constants/queryConstants.js";
+import { CloseEarthObjects, Meteor } from "app/types/meteors.ts";
+import { dangerousQueryParams } from "../../constants/queryConstants.ts";
 
-export const filterMeteors = (data, count, isDangerous) => {
+export const filterMeteors = (
+  data: CloseEarthObjects,
+  count?: string,
+  isDangerous?: string,
+): Meteor[] => {
   let result = parseMeteors(data);
 
   if (isDangerous) {
@@ -14,7 +19,7 @@ export const filterMeteors = (data, count, isDangerous) => {
   return result;
 };
 
-const parseMeteors = (data) => {
+const parseMeteors = (data: CloseEarthObjects): Meteor[] => {
   return Object.values(data).flatMap((day) =>
     day.map((meteor) => ({
       id: meteor.id,
@@ -34,7 +39,7 @@ const parseMeteors = (data) => {
   );
 };
 
-const handleIsDangerous = (isDangerous, data) => {
+const handleIsDangerous = (isDangerous: string, data: Meteor[]): Meteor[] => {
   if (!dangerousQueryParams.includes(isDangerous)) {
     throw new Error(
       `Invalid isDangerous value. Count should be true or false.`,
@@ -48,7 +53,7 @@ const handleIsDangerous = (isDangerous, data) => {
   );
 };
 
-const handleCount = (count, data) => {
+const handleCount = (count: string, data: Meteor[]) => {
   const parsedCount = parseInt(count);
 
   if (parsedCount <= 0) {
@@ -59,5 +64,5 @@ const handleCount = (count, data) => {
     throw new Error(`Invalid count value. Count should be number type.`);
   }
 
-  return data.slice(0, parseInt(count));
+  return data.slice(0, parsedCount);
 };

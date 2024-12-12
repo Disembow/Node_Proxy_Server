@@ -1,6 +1,11 @@
-import { fetchRoverImage } from "../services/rovers.service.js";
+import { NextFunction, Request, Response } from "express";
+import { fetchRoverImage } from "../services/rovers.service.ts";
 
-export const getRoverFormView = async (req, res, next) => {
+export const getRoverFormView = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     res.render("roverForm.njk");
   } catch (error) {
@@ -8,18 +13,26 @@ export const getRoverFormView = async (req, res, next) => {
   }
 };
 
-export const getRoverImage = async (req, res, next) => {
+export const getRoverImage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { apikey, sol } = req.body;
     const photo = await fetchRoverImage(apikey, sol || undefined);
 
-    return res.json({ photo });
+    res.json({ photo });
   } catch (error) {
     next(error);
   }
 };
 
-export const getRoverImageView = async (req, res, next) => {
+export const getRoverImageView = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { apikey, sol } = req.body;
     const photo = await fetchRoverImage(apikey, sol);

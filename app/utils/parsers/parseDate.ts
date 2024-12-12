@@ -1,6 +1,8 @@
 import { formatISO, isMatch, isMonday, previousMonday } from "date-fns";
 
-export const getCurrentWeekDates = (date = new Date()) => {
+export const getCurrentWeekDates = (
+  date: string | Date = new Date(),
+): [string, string] => {
   const today =
     date instanceof Date
       ? formatISO(new Date(), { representation: "date" })

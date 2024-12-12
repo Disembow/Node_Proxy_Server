@@ -2,9 +2,9 @@ import express from "express";
 import {
   getMeteors,
   getMeteorsView,
-} from "../controllers/meteors.controller.js";
-import { meteorsSchema } from "../utils/validation/index.js";
-import { validate } from "../utils/validation/validator.js";
+} from "../controllers/meteors.controller.ts";
+import { meteorsSchema } from "../utils/validation/index.ts";
+import { validate } from "../utils/validation/validator.ts";
 
 const router = express.Router();
 
