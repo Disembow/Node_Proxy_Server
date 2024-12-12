@@ -4,9 +4,9 @@ import { dirname, join } from "node:path";
 import nunjucks from "nunjucks";
 import { fileURLToPath } from "url";
 
-import config from "./app/config/config.js";
-import { meteorRouter, roverImageRouter } from "./app/routers/index.js";
-import { errorHandler } from "./app/utils/errorHandler/errorHandler.js";
+import config from "./app/config/config.ts";
+import { meteorRouter, roverImageRouter } from "./app/routers/index.ts";
+import { errorHandler } from "./app/utils/errorHandler/errorHandler.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

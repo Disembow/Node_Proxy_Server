@@ -1,0 +1,38 @@
+{
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "./dist"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": true
+  },
+  "compilerOptions": {
+    /* Projects */
+
+    /* Language and Environment */
+    "target": "ES2016",
+
+    /* Modules */
+    "module": "NodeNext",
+    "rootDir": "./",
+    "moduleResolution": "node16",
+    "baseUrl": "./",
+    "allowImportingTsExtensions": true,
+
+    /* JavaScript Support */
+    "allowJs": false,
+
+    /* Emit */
+    "noEmit": true,
+    "outDir": "./dist",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  }
+}

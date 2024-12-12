@@ -1,23 +1,24 @@
-import pluginJs from "@eslint/js";
+import eslint from "@eslint/js";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default tseslint.config(
   {
-    files: ["app/**/*.{js,mjs,cjs}"],
-  },
-  {
+    files: ["app/**/*.{js,mjs,cjs,ts}"],
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
       ecmaVersion: "latest",
     },
-  },
-  {
     rules: {
-      "no-unused-vars": ["error", { argsIgnorePattern: "^next$" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^next$" },
+      ],
+      "prettier/prettier": ["error", { endOfLine: "auto" }],
     },
   },
-  pluginJs.configs.recommended,
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
   prettierRecommended,
-];
+);

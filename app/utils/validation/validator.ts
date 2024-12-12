@@ -1,4 +1,8 @@
-import { TAGS } from "../../constants/queryConstants.js";
+import { NextFunction, Request, Response } from "express";
+import { Schema } from "joi";
+import { TAGS } from "../../constants/queryConstants.ts";
+
+type Tag = "query" | "body";
 
 const options = {
   abortEarly: false,
@@ -6,7 +10,7 @@ const options = {
   stripUnknown: true,
 };
 
-export const validate = (schema, tag = "body") => {
+export const validate = (schema: Schema, tag: Tag = "body") => {
   if (!schema) {
     throw new Error("Schema didn't found");
   }
@@ -15,17 +19,19 @@ export const validate = (schema, tag = "body") => {
     throw new Error("Incorrect tag for request parsing was used");
   }
 
-  return (req, res, next) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     const { error } = schema.validate(req[tag], options);
 
     if (error) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         message: `${tag} validation was failed`,
         description: error.details.map((e) => ({
           message: e.message,
         })),
       });
+
+      return;
     }
 
     next();

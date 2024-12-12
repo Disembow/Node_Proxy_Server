@@ -2,18 +2,18 @@
   "name": "node_proxy_server",
   "version": "1.0.0",
   "description": "Node Proxy Server study project",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=development npx nodemon index.js",
+    "start": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=production ts-node --esm index.ts",
+    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=development nodemon index.ts",
     "format": "prettier -w ./app",
     "lint": "eslint ./app",
     "prepare": "husky install",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js, jsx, ts, tsx}": [
+    "app/**/*.{js, jsx, ts, tsx}": [
       "npm run format",
       "npm run lint"
     ]
@@ -22,6 +22,8 @@
   "author": "Yauheni Naliotau",
   "license": "ISC",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
     "axios": "^1.7.8",
     "body-parser": "^1.20.3",
     "cross-env": "^7.0.3",
@@ -34,6 +36,9 @@
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "@types/nunjucks": "^3.2.6",
+    "concurrently": "^9.1.0",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -41,6 +46,9 @@
     "husky": "^8.0.0",
     "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0"
   }
 }

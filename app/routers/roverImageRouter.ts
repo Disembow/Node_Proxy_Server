@@ -4,9 +4,9 @@ import {
   getRoverFormView,
   getRoverImage,
   getRoverImageView,
-} from "../controllers/rovers.controller.js";
-import { roverSchema } from "../utils/validation/index.js";
-import { validate } from "../utils/validation/validator.js";
+} from "../controllers/rovers.controller.ts";
+import { roverSchema } from "../utils/validation/index.ts";
+import { validate } from "../utils/validation/validator.ts";
 
 const router = express.Router();
 
