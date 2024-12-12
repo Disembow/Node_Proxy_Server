@@ -22,10 +22,6 @@ nunjucks.configure("app/views", {
   express: app,
 });
 
-app.get("/error", () => {
-  throw new Error("Sentry test");
-});
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
