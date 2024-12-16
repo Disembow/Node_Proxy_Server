@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Schema } from "joi";
 import { TAGS } from "../../constants/queryConstants.ts";
 
-type Tag = "query" | "body";
+export type Tag = "query" | "body";
 
 const options = {
   abortEarly: false,

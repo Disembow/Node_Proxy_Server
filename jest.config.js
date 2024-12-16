@@ -14,5 +14,6 @@ export default {
     "schemas",
     "config",
     "index.ts",
+    "routers",
   ],
 };
