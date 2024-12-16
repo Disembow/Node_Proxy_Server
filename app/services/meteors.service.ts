@@ -1,5 +1,5 @@
-import { Meteor } from "app/types/meteors.ts";
 import { getMeteors } from "../repositories/meteors.repository.ts";
+import { Meteor } from "../types/meteors.ts";
 import { getCurrentWeekDates } from "../utils/parsers/parseDate.ts";
 import { filterMeteors } from "../utils/parsers/parseMeteors.ts";
 

@@ -1,4 +1,4 @@
-name: linter
+name: Node_Proxy_Server_Actions
 
 on:
   push:
@@ -26,3 +26,6 @@ jobs:
 
       - name: Eslint
         run: npm run lint
+
+      - name: Tests
+        run: npm run test:coverage

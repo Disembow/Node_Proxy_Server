@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/node";
 import { NextFunction, Request, Response } from "express";
 
-interface HttpError extends Error {
+export interface HttpError extends Error {
   status: number;
 }
 
