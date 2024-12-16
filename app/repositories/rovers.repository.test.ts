@@ -43,10 +43,11 @@ describe("Rovers Repository should", () => {
     const errorMessage = "Network Error";
     mockedAxios.get.mockRejectedValue(new Error(errorMessage));
 
-    // Act & Assert
-    await expect(getRoverImage(mockApiKey, mockSol)).rejects.toThrow(
-      errorMessage,
-    );
+    // Act
+    const act = () => getRoverImage(mockApiKey, mockSol);
+
+    // Assert
+    await expect(act).rejects.toThrow(errorMessage);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
   });
 });

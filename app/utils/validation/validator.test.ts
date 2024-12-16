@@ -115,7 +115,7 @@ describe("validate middleware should", () => {
     });
   });
 
-  it("should throw an error for unsupported tag", () => {
+  it("throw an error for unsupported tag", () => {
     // Arrange
     const schema = Joi.object({});
 

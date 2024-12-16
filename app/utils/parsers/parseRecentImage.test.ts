@@ -20,7 +20,7 @@ describe("parseRecentImage should", () => {
     },
   ];
 
-  test("return recent item when correct data provided", () => {
+  it("return recent item when correct data provided", () => {
     // Arrange
     const expectedImageSrc = "src/2";
 
@@ -31,7 +31,7 @@ describe("parseRecentImage should", () => {
     expect(result?.img_src).toBe(expectedImageSrc);
   });
 
-  test("return null when data was not provided", () => {
+  it("return null when data was not provided", () => {
     // Act
     const result = parseRecentImage(null!);
 
@@ -39,7 +39,7 @@ describe("parseRecentImage should", () => {
     expect(result).toBeNull();
   });
 
-  test("return null when data is empty", () => {
+  it("return null when data is empty", () => {
     // Act
     const result = parseRecentImage([]);
 

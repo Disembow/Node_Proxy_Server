@@ -25,7 +25,7 @@ describe("Meteors Repository should", () => {
       },
     };
 
-    mockedAxios.get.mockResolvedValue(mockResponse); // Simulate a successful response
+    mockedAxios.get.mockResolvedValue(mockResponse);
 
     const expectedUrl = `${BASE_API_URL}/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`;
 
@@ -40,12 +40,14 @@ describe("Meteors Repository should", () => {
 
   it("throw an error if the API request fails", async () => {
     // Arrange
-    const errorMessage = "Some Error";
-
+    const errorMessage = "Error";
     mockedAxios.get.mockRejectedValue(new Error(errorMessage));
 
-    // Act & Assert
-    await expect(getMeteors(startDate, endDate)).rejects.toThrow(errorMessage);
+    // Act
+    const act = () => getMeteors(startDate, endDate);
+
+    // Assert
+    await expect(act).rejects.toThrow(errorMessage);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
   });
 });

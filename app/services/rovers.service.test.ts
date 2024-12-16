@@ -82,10 +82,11 @@ describe("Rovers Service should", () => {
 
     mockedGetRoverImage.mockRejectedValue(mockError);
 
-    // Act & Assert
-    await expect(fetchRoverImage(mockApiKey, mockSol)).rejects.toThrow(
-      mockError,
-    );
+    // Act
+    const act = () => fetchRoverImage(mockApiKey, mockSol);
+
+    // Assert
+    await expect(act).rejects.toThrow(mockError);
     expect(mockedGetRoverImage).toHaveBeenCalledWith(mockApiKey, mockSol);
   });
 });

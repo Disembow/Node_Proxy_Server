@@ -31,7 +31,7 @@ describe("Meteors Service should", () => {
     jest.clearAllMocks();
   });
 
-  test("return parsed data", async () => {
+  it("return parsed data", async () => {
     // Arrange
     mockGetCurrentWeekDates.mockReturnValue([mockStartDate, mockEndDate]);
     mockGetMeteors.mockResolvedValue(mockCloseEarthObjects);
@@ -87,8 +87,11 @@ describe("Meteors Service should", () => {
     mockGetCurrentWeekDates.mockReturnValue([mockStartDate, mockEndDate]);
     mockGetMeteors.mockRejectedValue(mockError);
 
-    // Act & Assert
-    await expect(getReducedMeteors()).rejects.toThrow(mockError);
+    // Act
+    const act = () => getReducedMeteors();
+
+    // Assert
+    await expect(act).rejects.toThrow(mockError);
     expect(mockGetMeteors).toHaveBeenCalledTimes(1);
   });
 });

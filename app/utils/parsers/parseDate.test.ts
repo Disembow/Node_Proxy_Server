@@ -2,7 +2,7 @@ import { formatISO, isMonday, previousMonday } from "date-fns";
 import { getCurrentWeekDates } from "./parseDate.ts";
 
 describe("parseDate should", () => {
-  test("return right mondays and todays dates when correct input date string provided", () => {
+  it("return right mondays and todays dates when correct input date string provided", () => {
     // Arrange
     const expectedMonday = "2024-12-16";
     const expectedToday = "2024-12-20";
@@ -15,7 +15,7 @@ describe("parseDate should", () => {
     expect(today).toBe(expectedToday);
   });
 
-  test("return right mondays and todays dates when correct input date string provided", () => {
+  it("return right mondays and todays dates when correct input date string provided", () => {
     // Arrange
     const expectedToday = formatISO(new Date(), { representation: "date" });
     const expectedMonday = isMonday(expectedToday)
@@ -32,7 +32,7 @@ describe("parseDate should", () => {
     expect(today).toBe(expectedToday);
   });
 
-  test("throw error on incorrect input format", () => {
+  it("throw error on incorrect input format", () => {
     // Arrange
     const expectedErrorMessage = `Invalid date format. Expected format is "YYYY-MM-DD"`;
 

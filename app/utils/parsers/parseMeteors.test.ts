@@ -2,7 +2,7 @@ import { mockCloseEarthObjects } from "../../tests/mocks.ts";
 import { filterMeteors } from "./parseMeteors.ts";
 
 describe("filterMeteors should", () => {
-  test("parse meteors and return its array", () => {
+  it("parse meteors and return its array", () => {
     // Arrange
     const expectedResultLength = 4;
 
@@ -15,7 +15,7 @@ describe("filterMeteors should", () => {
     expect(result.length).not.toBeNull();
   });
 
-  test("return result arrording to the count value", () => {
+  it("return result arrording to the count value", () => {
     // Arrange
     const expectedResultLength = 3;
 
@@ -27,7 +27,7 @@ describe("filterMeteors should", () => {
     expect(result.length).not.toBeNull();
   });
 
-  test("return filtered data by isDangerous value", () => {
+  it("return filtered data by isDangerous value", () => {
     // Arrange
     const expectedResultLength = 2;
 
@@ -39,7 +39,7 @@ describe("filterMeteors should", () => {
     expect(result.length).not.toBeNull();
   });
 
-  test("throw error if count is less or equal to 0", () => {
+  it("throw error if count is less or equal to 0", () => {
     // Arrange
     const expectedErrorMessage = `Invalid count value. Count should be greater then zero.`;
 
@@ -51,7 +51,7 @@ describe("filterMeteors should", () => {
     expect(act).toThrow(expectedErrorMessage);
   });
 
-  test("throw error if count is not a number", () => {
+  it("throw error if count is not a number", () => {
     // Arrange
     const expectedErrorMessage = `Invalid count value. Count should be number type.`;
 
@@ -63,7 +63,7 @@ describe("filterMeteors should", () => {
     expect(act).toThrow(expectedErrorMessage);
   });
 
-  test("throw error if isDangerous has invalid value", () => {
+  it("throw error if isDangerous has invalid value", () => {
     // Arrange
     const expectedErrorMessage = `Invalid isDangerous value. Count should be true or false.`;
 
