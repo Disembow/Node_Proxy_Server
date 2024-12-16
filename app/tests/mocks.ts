@@ -90,3 +90,7 @@ export const getMockResponse = (photos: RoverImage[]): AxiosResponse => ({
   headers: {},
   config: { headers: null! },
 });
+
+// Common
+export const mockError = new Error("Service error");
+export const mockApiKey = "test-api-key";

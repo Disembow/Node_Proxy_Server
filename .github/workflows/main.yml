@@ -1,4 +1,4 @@
-name: linter
+name: Node_Proxy_Server_Actions
 
 on:
   push:
