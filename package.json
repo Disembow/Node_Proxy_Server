@@ -10,7 +10,9 @@
     "format": "prettier -w ./app",
     "lint": "eslint ./app",
     "prepare": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "test": "jest",
+    "test:coverage": "jest --coverage --collectCoverageFrom=\"./app/**\""
   },
   "lint-staged": {
     "app/**/*.{js, jsx, ts, tsx}": [
@@ -37,7 +39,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
+    "@jest/globals": "^29.7.0",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
     "@types/nunjucks": "^3.2.6",
     "concurrently": "^9.1.0",
@@ -46,9 +50,12 @@
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.13.0",
     "husky": "^8.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-node": "^29.7.0",
     "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
     "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.0"
