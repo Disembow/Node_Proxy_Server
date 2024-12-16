@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { DEFAULT_SOL } from "../constants/queryConstants.ts";
 import { getRoverImage } from "../repositories/rovers.repository.ts";
+import { getMockResponse, mockNormalizedSol, mockSol } from "../tests/mocks.ts";
 import { parseRecentImage } from "../utils/parsers/parseRecentImage.ts";
 import { fetchRoverImage } from "./rovers.service.ts";
 
@@ -23,16 +24,8 @@ describe("Rovers Service should", () => {
 
   it("fetch and parse the rover image with the given sol", async () => {
     // Arrange
-    const mockSol = "1000";
-    const mockNormalizedSol = "1000";
-    const mockResponse: AxiosResponse = {
-      data: { photos: [{ img_src: "img_src" }] },
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: { headers: null! },
-    };
     const mockParsedImage = { id: 1, img_src: "img_src", earth_date: "date" };
+    const mockResponse: AxiosResponse = getMockResponse([mockParsedImage]);
 
     mockedGetRoverImage.mockResolvedValue(mockResponse);
     mockedParseRecentImage.mockReturnValue(mockParsedImage);
@@ -53,13 +46,7 @@ describe("Rovers Service should", () => {
 
   it("use DEFAULT_SOL if sol is undefined or empty", async () => {
     // Arrange
-    const mockResponse: AxiosResponse = {
-      data: { photos: [] },
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: { headers: null! },
-    };
+    const mockResponse = getMockResponse([]);
 
     mockedGetRoverImage.mockResolvedValue(mockResponse);
     mockedParseRecentImage.mockReturnValue(null);
@@ -75,14 +62,7 @@ describe("Rovers Service should", () => {
 
   it("return null if no image is found", async () => {
     // Arrange
-    const mockSol = "1000";
-    const mockResponse: AxiosResponse = {
-      data: { photos: [] },
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: { headers: null! },
-    };
+    const mockResponse = getMockResponse([]);
 
     mockedGetRoverImage.mockResolvedValue(mockResponse);
     mockedParseRecentImage.mockReturnValue(null);
@@ -98,7 +78,6 @@ describe("Rovers Service should", () => {
 
   it("propagate errors from getRoverImage", async () => {
     // Arrange
-    const mockSol = "1000";
     const mockError = new Error("Network error");
 
     mockedGetRoverImage.mockRejectedValue(mockError);

@@ -1,5 +1,8 @@
 import { CloseEarthObjects, Meteor } from "app/types/meteors.ts";
+import { RoverImage } from "app/types/rover.ts";
+import { AxiosResponse } from "axios";
 
+// Meteors
 export const mockCloseEarthObjects: CloseEarthObjects = {
   "2024-12-16": [
     {
@@ -76,3 +79,14 @@ export const mockFilteredMeteors: Meteor[] = [
     relative_velocity: 120,
   },
 ];
+
+// Rovers
+export const mockSol = "1000";
+export const mockNormalizedSol = "1000";
+export const getMockResponse = (photos: RoverImage[]): AxiosResponse => ({
+  data: { photos: [...photos] },
+  status: 200,
+  statusText: "OK",
+  headers: {},
+  config: { headers: null! },
+});
