@@ -96,6 +96,7 @@ export const getMockResponse = (photos: RoverImage[]): AxiosResponse => ({
   headers: {},
   config: { headers: null! },
 });
+export const mockRoverImage = "http://example.com/photo.jpg";
 
 // Common
 export const mockError = new Error("Service error");
