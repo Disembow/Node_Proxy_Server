@@ -1,97 +1,75 @@
-import { NextFunction, Request, Response } from "express";
-import { getReducedMeteors } from "../services/meteors.service.ts";
-import { mockError, mockFilteredMeteors } from "../tests/mocks.ts";
-import { getMeteors, getMeteorsView } from "./meteors.controller.ts";
+import request from "supertest";
+import app from "../app.ts";
+import * as meteorsService from "../services/meteors.service.ts";
+import { mockError, mockFilteredMeteors, mockQuery } from "../tests/mocks.ts";
 
-jest.mock("../services/meteors.service.ts");
+jest.mock("../services/meteors.service.ts", () => ({
+  getReducedMeteors: jest.fn(),
+}));
 
-const mockedGetReducedMeteors = getReducedMeteors as jest.MockedFunction<
-  typeof getReducedMeteors
->;
-
-describe("Meteors Controller", () => {
-  let mockReq: Partial<Request>;
-  let mockRes: Partial<Response>;
-  let mockNext: NextFunction;
-
+describe("Meteors endpoint", () => {
   beforeEach(() => {
-    mockReq = {
-      query: {},
-    };
-
-    mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-      render: jest.fn(),
-    };
-
-    mockNext = jest.fn();
-
     jest.clearAllMocks();
   });
 
-  describe("getMeteors should", () => {
-    it("return data and status 200 when service succeeds", async () => {
-      // Arrange
-      mockedGetReducedMeteors.mockResolvedValue(mockFilteredMeteors);
-      mockReq.query = { date: "2024-12-20", count: "10", isDangerous: "true" };
+  it("should return filtered meteors", async () => {
+    jest
+      .spyOn(meteorsService, "getReducedMeteors")
+      .mockResolvedValue(mockFilteredMeteors);
 
-      // Act
-      await getMeteors(mockReq as Request, mockRes as Response, mockNext);
+    const response = await request(app)
+      .get("/api/v1/meteors/")
+      .query(mockQuery)
+      .expect("Content-Type", /json/)
+      .expect(200);
 
-      // Assert
-      expect(mockedGetReducedMeteors).toHaveBeenCalledWith(
-        "2024-12-20",
-        "10",
-        "true",
-      );
-      expect(mockRes.status).toHaveBeenCalledWith(200);
-      expect(mockRes.json).toHaveBeenCalledWith(mockFilteredMeteors);
-    });
-
-    it("call next function with an error when service fails", async () => {
-      // Arrange
-      mockedGetReducedMeteors.mockRejectedValue(mockError);
-
-      // Act
-      await getMeteors(mockReq as Request, mockRes as Response, mockNext);
-
-      // Assert
-      expect(mockedGetReducedMeteors).toHaveBeenCalled();
-      expect(mockNext).toHaveBeenCalledWith(mockError);
-    });
+    expect(response.body).toEqual(mockFilteredMeteors);
   });
 
-  describe("getMeteorsView", () => {
-    it("render view with data when service succeeds", async () => {
-      // Arrange
-      mockedGetReducedMeteors.mockResolvedValue(mockFilteredMeteors);
-      mockReq.query = { date: "2024-12-20", count: "10", isDangerous: "true" };
+  it("should throw an error when service fails", async () => {
+    jest
+      .spyOn(meteorsService, "getReducedMeteors")
+      .mockRejectedValue(mockError);
 
-      // Act
-      await getMeteorsView(mockReq as Request, mockRes as Response, mockNext);
+    const response = await request(app)
+      .get("/api/v1/meteors/")
+      .query(mockQuery)
+      .expect("Content-Type", /json/);
 
-      // Assert
-      expect(mockedGetReducedMeteors).toHaveBeenCalledWith(
-        "2024-12-20",
-        "10",
-        "true",
-      );
-      expect(mockRes.render).toHaveBeenCalledWith("meteors.njk", {
-        meteors: mockFilteredMeteors,
-      });
-    });
+    expect(response.body.message).toEqual("Service error");
+  });
+});
 
-    it("call next with an error when service fails", async () => {
-      // Arrange
-      mockedGetReducedMeteors.mockRejectedValue(mockError);
+describe("Meteors View endpoint", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-      // Act
-      await getMeteorsView(mockReq as Request, mockRes as Response, mockNext);
+  it("should render the meteors view with valid data", async () => {
+    jest
+      .spyOn(meteorsService, "getReducedMeteors")
+      .mockResolvedValue(mockFilteredMeteors);
 
-      // Assert
-      expect(mockedGetReducedMeteors).toHaveBeenCalled();
-      expect(mockNext).toHaveBeenCalledWith(mockError);
-    });
+    const response = await request(app)
+      .get("/api/v1/meteors/view")
+      .query(mockQuery)
+      .expect("Content-Type", /text/)
+      .expect(200);
+
+    expect(response.text).toContain(`<table class="table"`);
+  });
+
+  it("should handle an error and pass them to the error handler", async () => {
+    jest
+      .spyOn(meteorsService, "getReducedMeteors")
+      .mockRejectedValue(mockError);
+
+    const response = await request(app)
+      .get("/api/v1/meteors/view")
+      .query(mockQuery)
+      .expect("Content-Type", /json/)
+      .expect(500);
+
+    expect(response.body.message).toEqual("Service error");
   });
 });

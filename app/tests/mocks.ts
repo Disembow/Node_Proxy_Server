@@ -69,6 +69,12 @@ export const mockIsDangerous = "true";
 export const mockDate = "2024-12-20";
 export const mockCount = "5";
 
+export const mockQuery = {
+  date: "2024-12-20",
+  count: "10",
+  isDangerous: "true",
+};
+
 export const mockFilteredMeteors: Meteor[] = [
   {
     id: "1",
