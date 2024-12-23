@@ -13,10 +13,12 @@ describe("Meteors endpoint", () => {
   });
 
   it("should return filtered meteors", async () => {
+    // Arrange
     jest
       .spyOn(meteorsService, "getReducedMeteors")
       .mockResolvedValue(mockFilteredMeteors);
 
+    // Act & Assert
     const response = await request(app)
       .get("/api/v1/meteors/")
       .query(mockQuery)
@@ -27,10 +29,12 @@ describe("Meteors endpoint", () => {
   });
 
   it("should throw an error when service fails", async () => {
+    // Arrange
     jest
       .spyOn(meteorsService, "getReducedMeteors")
       .mockRejectedValue(mockError);
 
+    // Act & Assert
     const response = await request(app)
       .get("/api/v1/meteors/")
       .query(mockQuery)
@@ -46,10 +50,12 @@ describe("Meteors View endpoint", () => {
   });
 
   it("should render the meteors view with valid data", async () => {
+    // Arrange
     jest
       .spyOn(meteorsService, "getReducedMeteors")
       .mockResolvedValue(mockFilteredMeteors);
 
+    // Act & Assert
     const response = await request(app)
       .get("/api/v1/meteors/view")
       .query(mockQuery)
@@ -60,10 +66,12 @@ describe("Meteors View endpoint", () => {
   });
 
   it("should handle an error and pass them to the error handler", async () => {
+    // Arrange
     jest
       .spyOn(meteorsService, "getReducedMeteors")
       .mockRejectedValue(mockError);
 
+    // Act & Assert
     const response = await request(app)
       .get("/api/v1/meteors/view")
       .query(mockQuery)

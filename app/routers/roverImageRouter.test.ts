@@ -15,6 +15,7 @@ jest.mock("../services/rovers.service.ts", () => ({
 describe("Rover endpoint", () => {
   describe("GET /api/v1/rover/view-form", () => {
     it("should render the rover form view", async () => {
+      // Act & Assert
       const response = await request(app)
         .get("/api/v1/rover/view-form")
         .expect(200);
@@ -27,10 +28,12 @@ describe("Rover endpoint", () => {
 
   describe("POST /api/v1/rover", () => {
     it("should return a rover image when valid data is provided", async () => {
+      // Arrange
       jest
         .spyOn(roverService, "fetchRoverImage")
         .mockResolvedValue(mockRoverImage);
 
+      // Act & Assert
       const response = await request(app)
         .post("/api/v1/rover")
         .send({ apikey: mockApiKey, sol: mockSol })
@@ -40,8 +43,10 @@ describe("Rover endpoint", () => {
     });
 
     it("should return an error if the service fails", async () => {
+      // Arrange
       jest.spyOn(roverService, "fetchRoverImage").mockRejectedValue(mockError);
 
+      // Act & Assert
       const response = await request(app)
         .post("/api/v1/rover")
         .send({ apikey: mockApiKey, sol: "" })
@@ -53,10 +58,12 @@ describe("Rover endpoint", () => {
 
   describe("POST /api/v1/rover/view", () => {
     it("should render rover image view when image is found", async () => {
+      // Arrange
       jest
         .spyOn(roverService, "fetchRoverImage")
         .mockResolvedValue(mockRoverImage);
 
+      // Act & Assert
       const response = await request(app)
         .post("/api/v1/rover/view")
         .send({ apikey: mockApiKey, sol: mockSol })
@@ -68,8 +75,10 @@ describe("Rover endpoint", () => {
     });
 
     it("should return 404 if the service fails", async () => {
+      // Arrange
       jest.spyOn(roverService, "fetchRoverImage").mockRejectedValue(mockError);
 
+      // Act & Assert
       const response = await request(app)
         .post("/api/v1/rover/view")
         .send({ apikey: mockApiKey, sol: mockSol })
